@@ -67,14 +67,19 @@ class Auth extends CI_Controller
 
             if ($validate) {
                 $data = [
-                    'name'     => $validate['user_name'],
-                    'email'     => $validate['user_email'],
+                    'name'     => $validate['name'],
+                    'email'     => $validate['email'],
                     'id'     => $validate['id'],
                     'role'  => $validate['role'],
                     'is_login'  => 1
                 ];
 
                 $this->session->set_userdata($data);
+
+                if ($validate['role'] == 'company') {
+                    redirect(base_url() . 'admin');
+                }
+
                 redirect(base_url() . 'home');
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
@@ -122,4 +127,11 @@ class Auth extends CI_Controller
             redirect(base_url('auth/login'));
         }
     }
+
+    
+  public function logout()
+  {
+    $this->session->sess_destroy();
+    redirect(base_url());
+  }
 }
