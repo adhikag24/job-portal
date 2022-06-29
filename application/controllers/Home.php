@@ -35,12 +35,14 @@ class Home extends CI_Controller
             $data['data'][$key]['employer'] = $this->db->get_where('user',['id'=>$value['publisher_id']])->row_array();
          
             $check = $this->db->get_where('job_apply',['user_id'=>$userId,'job_id' => $value['id']])->row_array();
+            $data['data'][$key]['applicant'] = $this->db->get_where('job_apply',['job_id' => $value['id']])->num_rows();
             if (!empty($check)) {
                 $data['data'][$key]['is_applied'] = true;
             }else{
                 $data['data'][$key]['is_applied'] = false;
             }
         }
+
    
 
 

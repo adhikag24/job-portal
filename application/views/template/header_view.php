@@ -35,7 +35,7 @@
 
     <div id="nav">
         <nav class="container navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="<?php echo base_url(); ?>">      <img src="<?= base_url() ?>assets/image/other/logo_application.png" width="25%" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"></a>
+            <a class="navbar-brand" href="<?php echo base_url(); ?>">      <img src="<?= base_url() ?>assets/image/other/logo_application.png  " width="25%" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
