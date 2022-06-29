@@ -8,8 +8,7 @@
     <title>Register Job Portal</title>
 
     <!-- Font Icon -->
-    <link rel="stylesheet" type="text/css"
-        href="<?php echo base_url(); ?>css/style.css?<?php echo date('l jS \of F Y h:i:s A'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css?<?php echo date('l jS \of F Y h:i:s A'); ?>">
     <!-- Latest compiled and minified CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -27,7 +26,7 @@
 
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="<?= base_url() ?>auth/register_process" method="post">
+                    <?php echo form_open_multipart('auth/register_process');?>
                             <h3 class="text-center text-info">Register</h3>
                             <?= $this->session->flashdata('message'); ?>
 
@@ -53,11 +52,26 @@
                             </div>
                             <div class="form-group">
                                 <label for="role" class="text-info">Register As:</label><br>
-                                <select class="custom-select"  name="role" id="role">
-                                    <option value="user" selected>User</option>
+                                <select class="custom-select" name="role" id="role">
+                                    <option value="" selected>Select Role</option>
+                                    <option value="user">User</option>
                                     <option value="company">Company</option>
                                 </select>
                                 <?= form_error('role', '<small class="text-danger pl-3">', '</small>') ?>
+                            </div>
+                            <div class="form-group" id="formForCV">
+                                <!-- <label for="role" class="text-info">Register As:</label><br>
+                                <select class="custom-select" name="role" id="role">
+                                    <option value="user" selected>User</option>
+                                    <option value="company">Company</option>
+                                </select> -->
+                            </div>
+                            <div class="form-group" id="formForPP">
+                                <!-- <label for="role" class="text-info">Register As:</label><br>
+                                <select class="custom-select" name="role" id="role">
+                                    <option value="user" selected>User</option>
+                                    <option value="company">Company</option>
+                                </select> -->
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
@@ -75,3 +89,21 @@
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>
+
+<script>
+    $('#role').on('change', function() {
+
+        $('#formForCV').empty();
+        $('#formForPP').empty();
+        if (this.value == 'user') {
+            $('#formForCV').html(` <label for="role" class="text-info">CV (Required):</label><br>
+  <input type="file" name="fileCV" class="form-control">
+        `);
+        }
+            $('#formForPP').html(` <label for="role" class="text-info">Profile Picture:</label><br>
+        <input type="file" name="fileProfileImage" class="form-control">
+        `); 
+        
+        
+    });
+</script>

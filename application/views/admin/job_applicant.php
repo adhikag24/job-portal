@@ -61,7 +61,7 @@
                                             <td id="jobId" style="display:none;"><?= $i['job_id'] ?></td>
                                             <td><?= $i['user_detail']['name'] ?></td>
                                             <td><?= $i['user_detail']['email'] ?></td>
-                                            <td><?= $i['user_detail']['name'] ?></td>
+                                            <td> <a href="<?=base_url()?>assets/image/<?= $i['user_detail']['cv'] ?>"> <span class="btn btn-primary"><i class="nav-icon fas fa-file-alt"></span></i></a></td>
                                             <td><?= $i['status'] ?></td>
                                             <td> <select id="updateStatus" class="custom-select">
                                                     <?php foreach ($action_list as $j) : ?>

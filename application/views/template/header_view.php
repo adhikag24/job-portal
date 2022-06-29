@@ -21,7 +21,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Jquery Validate -->
@@ -33,42 +33,20 @@
 
     <title>Final Project</title>
 
-    <div id="nav">
+    <!-- <div id="nav">
         <nav class="container navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="<?php echo base_url(); ?>">      <img src="<?= base_url() ?>assets/image/other/logo_application.png  " width="25%" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"></a>
+            <a class="navbar-brand" href="<?php echo base_url(); ?>"> <img src="<?= base_url() ?>assets/image/other/logo_application.png  " width="25%" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-nav me-auto">
-                    <!-- <router-link to="/" class="nav-item nav-link">Home</router-link> -->
-                    <!-- <router-link to="my-bid" class="nav-item nav-link">My Bid</router-link> -->
                 </div>
-                <?php if (empty($section)):  
-                    
-                    $section = "";?>
-                   
-                <?php endif;?>
-                <ul class="navbar-nav">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link <?= $section == "home" ? 'active' : ''; ?>" href="<?= base_url() ?>" width="150px">Ongoing Bid</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $section == "upcomingBid" ? 'active' : ''; ?>" href="<?= base_url() ?>home/upcomingbid">Upcoming Bid</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $section == "finishedBid" ? 'active' : ''; ?>" href="<?= base_url() ?>home/finishedbid">Finished Bid</a>
-                    </li> -->
-                    
-                </ul>
-                <div class="container">
-                    <div class="row height d-flex justify-content-center align-items-center">
-                        <!-- <div class="col-md-8">
-                            <div class="search"> <i class="fa fa-search"></i> <input type="text" class="form-control" placeholder="Looking For Some Product?"> <button class="btn btn-default"><span class="text-white">Search</span></button> </div>
-                        </div> -->
-                    </div>
-                </div>
+                <?php if (empty($section)) :
+                    $section = ""; ?>
+                <?php endif; ?>
+
                 <div class="d-flex flex-row bd-highlight mb-3">
                     <div class="p-2 bd-highlight">
                         <form class="d-flex">
@@ -78,12 +56,10 @@
                                         <?= $this->session->userdata('name') ?>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <?php  if($this->session->userdata('role') != 'user'):?>
-                                        <a class="dropdown-item" href="<?= base_url() ?>admin">Admin Page</a>
-                                        <?php else: ?>
-                                        <a class="dropdown-item" href="<?= base_url() ?>job/my_application">Application List</a>
-                                        <!-- <a class="dropdown-item" href="<?= base_url() ?>product/myproduct">My Product</a>
-                                        <a class="dropdown-item" href="<?= base_url() ?>bid/mybid">My Bids</a> -->
+                                        <?php if ($this->session->userdata('role') != 'user') : ?>
+                                            <a class="dropdown-item" href="<?= base_url() ?>admin">Admin Page</a>
+                                        <?php else : ?>
+                                            <a class="dropdown-item" href="<?= base_url() ?>job/my_application">Application List</a>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -98,6 +74,50 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </nav>
+    </div> -->
+    <div id="nav">
+        <nav class="container navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand " href="<?php echo base_url(); ?>"> <img src="<?= base_url() ?>assets/image/other/logo_new.png" width="200" height="85" class="img-responsive" alt="AdminLTE Logo"></a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="form-inline mr-auto" style="margin-left:150px;" action="<?= base_url()?>home/job_search" method="post">
+                    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+                <div class="d-flex flex-row bd-highlight mb-3">
+                    <div class="p-2 bd-highlight">
+                        <form class="d-flex">
+                            <?php if ($this->session->userdata('is_login')) : ?>
+                                <div class="dropdown mr-3">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?= $this->session->userdata('name') ?>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <?php if ($this->session->userdata('role') != 'user') : ?>
+                                            <a class="dropdown-item" href="<?= base_url() ?>admin">Admin Page</a>
+                                        <?php else : ?>
+                                            <a class="dropdown-item" href="<?= base_url() ?>job/my_application">Application List</a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="btn btn-warning shadow" href="<?= base_url() ?>auth/logout">Logout</a>
+                                </div>
+                            <?php else : ?>
+                                <div>
+                                    <a class="btn btn-success shadow" href="<?= base_url() ?>auth/login">Login</a>
+                                </div>
+                            <?php endif; ?>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </nav>
     </div>

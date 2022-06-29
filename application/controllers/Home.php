@@ -21,11 +21,19 @@ class Home extends CI_Controller
      */
     public function index()
     {
+        $get  =  $this->input->get();
+     
         $data['section'] = 'home';
         $userId = $this->session->userdata('id');
 
         $this->db->select('*');
         $this->db->from('job');
+        
+        if (!empty($get['search'])) {
+            $this->db->like('title', $get['search']);
+            $this->db->or_like('description', $get['search']);
+        }
+       
         // $this->db->join('user', 'user.id = job.publisher_id', 'right');
         $query = $this->db->get();
 
@@ -49,5 +57,12 @@ class Home extends CI_Controller
         $this->load->view('template/header_view.php', $data);
         $this->load->view('home/home.php', $data);
         $this->load->view('template/footer_view.php');
+    }
+    public function job_search()
+    {
+
+        $post = $this->input->post();
+
+        redirect(base_url().'home?search='.$post['search'], 'refresh');
     }
 }

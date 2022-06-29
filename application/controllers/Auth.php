@@ -109,11 +109,36 @@ class Auth extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->registration();
         } else {
+
+            $config['upload_path']          = './assets/image';
+            $config['allowed_types']        = 'jpg|png|jpeg|pdf|docx';
+            $config['max_size']             = 0;
+            $config['max_width']            = 0;
+            $config['max_height']           = 0;
+            $config['overwrite']            = FALSE;
+            $config['remove_spaces']        = TRUE;
+
+            $this->load->library('upload', $config);
+
+            $profileCVVal = "";
+            if (!empty($_FILES['fileCV']['name'])) {
+                if (!$this->upload->do_upload('fileCV')) {
+                    print_r($this->upload->display_errors());
+                } 
+                $profileCVVal = $_FILES['fileCV']['name'];
+            }
+
+            if (!$this->upload->do_upload('fileProfileImage')) {
+                print_r($this->upload->display_errors());
+            } 
+
             $data = [
                 'name' => $post['name'],
                 'email' => $post['email'],
                 'password' => md5($post['password1']),
-                'role' => $post['role']
+                'role' => $post['role'],
+                'cv'    => $profileCVVal,
+                'profile_picture'    => $_FILES['fileProfileImage']['name']
             ];
 
             print_r($data);
